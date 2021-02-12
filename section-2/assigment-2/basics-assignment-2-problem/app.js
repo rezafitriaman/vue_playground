@@ -6,7 +6,7 @@ const app = new Vue({
         inputTwo: ''
     },
     methods: {
-        showAlert: function () {
+        showAlert: function () { 
             const text = (this.inputOne === '') ? 'Hello! I am an alert box!!' : this.inputOne;
             window.alert(text);
         },
@@ -15,7 +15,8 @@ const app = new Vue({
             this.inputOne = event.target.value;
         },
         outputTwo: function (event) {
-            this.inputTwo = event.target.value;
+            console.log('enter pressed');
+            this.inputTwo = this.inputOne;
         }
     },
 });
