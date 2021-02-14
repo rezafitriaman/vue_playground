@@ -3,6 +3,40 @@ const app = new Vue({
     data: {
         firstButton: 'Add 5',
         secondButton: 'Add 1',
+        number: 0
+    },
+    watch: {
+        result: function() {
+            console.log('watch')
+            setTimeout(() => {
+                this.number = 0
+            },2000);
+        }
+    },
+    computed: {
+        result: function() {
+            if(this.number < 37) {
+                return 'Not there yet'
+            }else if(this.number > 37) {
+                return 'Too much!'
+            }else {
+                return this.number
+            }
+        }
+    },
+    methods: {
+        addNumber: function(num) {
+            this.number = this.number + num
+            console.log(this.number)
+        }
+    },
+});
+
+/* const app = new Vue({
+    el: '#assignment',
+    data: {
+        firstButton: 'Add 5',
+        secondButton: 'Add 1',
         result: 0,
         message: 'click pls', 
         timeoutOn: true
@@ -13,11 +47,9 @@ const app = new Vue({
 
             if(this.timeoutOn) {
                 this.timeoutOn = false;
-                console.log('time out', this.timeoutOn)
                 setTimeout(() =>{
-                    console.log('time out');
                     this.result = 0
-                    this.message = 'again'
+                    this.message = 'Again'
                     this.timeoutOn = true;
                 },5000);
             }
@@ -25,7 +57,6 @@ const app = new Vue({
     },
     methods: {
         addButton(button) {
-            console.log(button)
             if(button === 'first') {
                 this.result = this.result + 5
             }else {
@@ -35,10 +66,11 @@ const app = new Vue({
             if(this.result < 37) {
                 this.message = 'Not there yet'
             }else if(this.result > 37) {
-                this.message = 'Too mutch!'
+                this.message = 'Too much!'
             }else {
                 this.message = this.result
             }
         },
     },
-});  
+});   */
+
