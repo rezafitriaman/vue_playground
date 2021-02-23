@@ -29,16 +29,23 @@
         <div class="healthbar">
           <div class="healthbar__value" v-bind:style="{width: playerHealth + '%'}"></div>
           {{playerHealth}}
-        </div>
+        </div> 
       </section>
       <section> 
         <span class="round">Round: {{round}}</span>
       </section>
-      <section id="controls">
+      <section id="gameOver" v-if="gameOver">
+        <h1>GAME OVER</h1>
+        <h3 v-if="draw">Draw!</h3>
+        <h3 v-else-if="monsterWon">Monster won!</h3>  
+        <h3 v-else>Player won!</h3>
+        <button v-on:click="playAgain()">Play again</button>
+      </section>
+      <section id="controls" v-else>
         <button v-on:click="attackMonster()">ATTACK</button>
-        <button v-on:click="specialAttackMonster()" v-bind:disabled="!canUseSpecialAttack">SPECIAL ATTACK {{canUseSpecialAttack}}</button>
-        <button>HEAL</button>
-        <button>SURRENDER</button>
+        <button v-on:click="specialAttackMonster()" v-bind:disabled="!canUseSpecialAttack">SPECIAL ATTACK</button>
+        <button v-on:click="healPlayer()">HEAL</button>
+        <button v-on:click="surrender()">SURRENDER</button>
       </section>
       <section id="log" class="container">
         <h2>Battle Log</h2>
