@@ -10,14 +10,15 @@ const app = new Vue({
         round: 0,
         specialAttackEnable: true,
         specialAttackWaitCounter: 0,
-        gatherEnergyForSpecialAttack: 3 
+        gatherEnergyForSpecialAttack: 3,
+        battleLogs: [],
     },
-    computed: {
+    computed: { 
         canUseSpecialAttack: function() {
             return this.specialAttackEnable
         },
         gameOver: function() {
-            return this.playerHealth <= 0|| this.monsterHealth <= 0
+            return this.playerHealth <= 0|| this.monsterHealth <= 0 
         },
         monsterWon: function() {
             return this.playerHealth <= 0 && this.monsterHealth > 0
@@ -25,15 +26,23 @@ const app = new Vue({
         draw: function() { 
             return this.playerHealth <= 0 && this.monsterHealth <= 0   
         }
+        
     },
     watch: {
         specialAttackWaitCounter: function(value) {
             if(value === this.gatherEnergyForSpecialAttack) {
                 this.specialAttackEnable = true 
             }
-        }
+        } 
     },
     methods: {
+        logs: function(who, whatHappen, howMuch) {
+            this.battleLogs.unshift({
+                who: who,
+                whatHappen: whatHappen,
+                howMuch: howMuch
+            })
+        },
         playAgain: function() {
             this.playerHealth = 100,
             this.monsterHealth = 100,
@@ -56,7 +65,9 @@ const app = new Vue({
 
             this.attackPlayer()
             this.round = this.round + 1
-            this.specialAttackWaitCounter = this.specialAttackWaitCounter + 1
+            this.specialAttackWaitCounter = this.specialAttackWaitCounter + 1 
+
+            this.logs('Player', 'heals', healPower)
         },
         attackMonster: function() {
             const damageDealt = randomNumber(5, 12)
@@ -70,14 +81,20 @@ const app = new Vue({
             this.attackPlayer()
             this.round = this.round + 1
             this.specialAttackWaitCounter = this.specialAttackWaitCounter + 1
+            this.logs('Player', 'attack', damageDealt)
+
         },
         attackPlayer: function() {
             const damageDealt = randomNumber(8, 18)
 
-            if(this.playerHealth - damageDealt < 0){ 
-                this.playerHealth = 0
-            }else {
-                this.playerHealth = this.playerHealth - damageDealt
+            if(this.monsterHealth > 0) {
+                if(this.playerHealth - damageDealt < 0){ 
+                    this.playerHealth = 0
+                }else {
+                    this.playerHealth = this.playerHealth - damageDealt
+                }
+                
+                this.logs('Monster', 'attack', damageDealt)
             }
         },
         specialAttackMonster: function() {
@@ -93,6 +110,7 @@ const app = new Vue({
             this.round = this.round + 1
             this.specialAttackWaitCounter = 0
             this.specialAttackEnable = false
+            this.logs('Player', 'special-attack', damageDealt)
         }
     }
 });

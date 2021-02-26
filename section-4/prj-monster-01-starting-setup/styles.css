@@ -103,22 +103,25 @@ button:disabled {
 }
 
 .log--player {
-  color: #7700ff;
+  color: #7700ff; 
 }
 
 .log--monster {
-  color: #da8d00;
+  color: #da8d00; 
 }
 
 .log--damage {
   color: red;
 }
 
-.log--heal {
-  color: green;
+.log--heal { 
+  color: green; 
 }
 
-#gameOver {
+.log--specialDamage {
+  color: rgb(228, 47, 204);
+}
+#gameOver { 
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

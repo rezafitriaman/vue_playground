@@ -49,8 +49,18 @@
       </section>
       <section id="log" class="container">
         <h2>Battle Log</h2>
-        <ul></ul>
+        <ul> 
+          <li v-for="(battleLog, index) in battleLogs" :key="index">
+            <span 
+              v-bind:class="battleLog.who === 'Player' ? 
+                'log--player' : 'log--monster'">{{battleLog.who}}</span>
+            <span 
+              v-bind:class="battleLog.whatHappen === 'heals' ? 
+              'log--heal' : battleLog.whatHappen === 'attack' ? 
+              'log--damage' : 'log--specialDamage'">{{battleLog.whatHappen}} for {{battleLog.howMuch}} damage</span>
+          </li>
+        </ul>
       </section>
     </div>
-  </body>
+  </body> 
 </html>
