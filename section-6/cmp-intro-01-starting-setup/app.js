@@ -32,3 +32,5 @@ app.component('friend-contact', {
   })
 
 app.mount('#app')
+
+console.log('vue')
