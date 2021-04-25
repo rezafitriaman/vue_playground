@@ -1,0 +1,22 @@
+<template>
+    <section>
+        <h2>Select a topic</h2>
+        <knowledge-grid :topics="topics" @select-topic="$emit('select-topic', $event)"></knowledge-grid>
+    </section>
+</template>
+
+<script>
+import KnowledgeGrid from './KnowledgeGrid.vue'
+export default {
+    components: {
+        KnowledgeGrid
+    },
+    props: ['topics'],
+    emits: ['select-topc'],
+    methods: {},
+/*     created() {
+        console.log('At this point, this.property is now reactive and propertyComputed will update.')
+        console.log(this.topics);
+    } */
+}
+</script>
