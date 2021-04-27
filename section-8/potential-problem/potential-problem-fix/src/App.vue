@@ -1,7 +1,12 @@
 <template>
   <section>
-    <active-element></active-element>
-    <knowledge-base :topics="topics"></knowledge-base>
+    <active-element
+    :topic-title="activeTopic && activeTopic.title"
+    :text="activeTopic && activeTopic.fullText"
+    ></active-element>
+    <knowledge-base 
+    :topics="topics"
+    @select-topic="activateTopic"></knowledge-base>
   </section>
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
   <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
@@ -39,8 +44,10 @@ export default {
     }
   },
   methods: {
-    activateTopic() {
-
+    activateTopic(topicId) {
+      console.log(topicId);
+      this.activeTopic = this.topics.find((topic) => topic.id === topicId);
+      console.log(this.activeTopic);
     }
   }
 }

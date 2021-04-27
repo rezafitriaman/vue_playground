@@ -12,7 +12,7 @@ export default {
         KnowledgeGrid
     },
     props: ['topics'],
-    emits: ['select-topc'],
+    emits: ['select-topic'],
     methods: {},
 /*     created() {
         console.log('At this point, this.property is now reactive and propertyComputed will update.')
