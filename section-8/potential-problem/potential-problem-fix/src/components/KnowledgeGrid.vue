@@ -6,7 +6,6 @@
             :id="topic.id"
             :topic-name="topic.title"
             :description="topic.description"
-            @select-topic="$emit('select-topic', $event)"
         ></knowledge-element>
     </ul>
 </template>
@@ -18,8 +17,8 @@ export default {
     components: {
         KnowledgeElement
     },
-    props: ['topics'],
-    emits: ['select-topic'],
+    inject:['topics'],
+    //emits: ['select-topic'],
 /*     methods: {
         test(value) {
             console.log(value);

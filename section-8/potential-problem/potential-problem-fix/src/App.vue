@@ -4,9 +4,7 @@
     :topic-title="activeTopic && activeTopic.title"
     :text="activeTopic && activeTopic.fullText"
     ></active-element>
-    <knowledge-base 
-    :topics="topics"
-    @select-topic="activateTopic"></knowledge-base>
+    <knowledge-base></knowledge-base>
   </section>
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
   <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
@@ -43,12 +41,28 @@ export default {
       activeTopic: null, 
     }
   },
+  provide() {
+    return {
+      topics :this.topics,
+      activateTopic: this.activateTopic
+    }
+  },
   methods: {
     activateTopic(topicId) {
       console.log(topicId);
       this.activeTopic = this.topics.find((topic) => topic.id === topicId);
       console.log(this.activeTopic);
     }
+  },
+  mounted() {
+    setTimeout(()=> {
+      this.topics.push({
+          id: 'reza',
+          title: 'master reza',
+          description: 'Components are a core concept for building Vue UIs and apps',
+          fullText: 'With components, you can split logic (and markup) into separate building blocks and then combine those building blocks (and re-use them) to build powerful user interfaces.',
+        });
+    },3000);
   }
 }
 </script>
