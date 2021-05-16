@@ -1,34 +1,20 @@
 <template>
   <the-header :title="headerTitle"></the-header>
-  <stored-resources :resources="storedReources"></stored-resources>
+  <the-resources></the-resources>
 </template>
 
 <script>
-import StoredResources from "./components/learning-resources/StoredResources";
 import TheHeader from "./components/layouts/TheHeader";
+import TheResources from "./components/learning-resources/TheResources";
 export default {
   name: "App",
   components: {
     TheHeader,
-    StoredResources,
+    TheResources
   },
   data() {
     return {
       headerTitle: 'Remember me',
-      storedReources: [
-        {
-          id: "official-guide",
-          title: "Official Guide",
-          description: "The official vue.js documention",
-          link: "http://vuejs.org",
-        },
-        {
-          id: "google",
-          title: "Google",
-          description: "Lear to google....",
-          link: "http://google.org",
-        },
-      ],
     };
   },
 };

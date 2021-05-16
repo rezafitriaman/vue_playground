@@ -2,6 +2,7 @@
   <ul>
     <learning-resources
       v-for="storedReource in resources"
+      :id="storedReource.id"
       :key="storedReource.id"
       :title="storedReource.title"
       :description="storedReource.description"
@@ -18,7 +19,7 @@ export default {
     components: {
         LearningResources
     },
-    props: ['resources']
+    inject: ['resources']
 }
 </script>
 
