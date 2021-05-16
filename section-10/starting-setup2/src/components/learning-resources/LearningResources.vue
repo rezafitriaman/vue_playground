@@ -23,7 +23,6 @@ export default {
 <style scoped>
 li {
   margin: auto;
-  max-width: 40rem;
 }
 
 header {
