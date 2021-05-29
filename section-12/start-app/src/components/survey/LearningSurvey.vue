@@ -36,12 +36,15 @@
             value="great"
             v-model.trim="chosenRating"
           />
-          <label for="rating-average">Average</label>
+          <label for="rating-great">Great</label>
         </div>
         <p v-if="invalidInput">One or more input fields are invalid. Please check uour provided data</p>
       </form>
       <div>
           <base-button type="submit" @click="submitSurvey">Submit</base-button>
+          <p v-if="error">
+            {{ error }}
+          </p>
       </div>
     </base-card>
   </section>
@@ -51,12 +54,13 @@
 export default {
     data() {
         return {
-            enteredName: '',
-            chosenRating: null,
-            invalidInput: false
-        }
+          enteredName: '',
+          chosenRating: null,
+          invalidInput: false,
+          error: null
+       }
     },
-    emits: ['survey-submit'],
+    //emits: ['survey-submit'],
     methods: {
         submitSurvey(event) {
             event.preventDefault();
@@ -67,10 +71,30 @@ export default {
             }
             this.invalidInput = false
 
-            this.$emit('survey-submit', {
+            /* this.$emit('survey-submit', {
                 userName: this.enteredName,
                 rating: this.chosenRating
-            })
+            }) */
+
+            fetch('https://vue-http-demo-5651f-default-rtdb.europe-west1.firebasedatabase.app/surveys.json', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'                                 
+              },
+              body: JSON.stringify({
+                userName: this.enteredName,
+                rating: this.chosenRating
+              })
+            }).then((response) => {
+              if(response.ok) {
+                console.log('request has been send');
+              }else {
+                throw new Error('Could not save data!');
+              }
+            }).catch((error) => {
+              console.log(error);
+              this.error = error.message;
+            });
 
             this.enteredName = ''
             this.chosenRating = null

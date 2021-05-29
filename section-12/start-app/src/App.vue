@@ -1,26 +1,38 @@
 <template>
-  <learning-survey @survey-submit="storeSurvey"></learning-survey>
+  <!-- <learning-survey @survey-submit="storeSurvey"></learning-survey> -->
+  <learning-survey></learning-survey>
+  <!-- <user-experiences :results="saveSurveyResults"></user-experiences> -->
+  <user-experiences></user-experiences>
 </template>
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
 import LearningSurvey from './components/survey/LearningSurvey'
+import UserExperiences from './components/survey/UserExperiences'
 
 export default {
   name: 'App',
   components: {
-    LearningSurvey
+    LearningSurvey,
+    UserExperiences
   },
-  data() {
+  /* data() {
     return {
       saveSurveyResults: []
     }
   },
   methods: {
     storeSurvey(surveyData){
-      console.log(surveyData);
+      console.log('surveyData', surveyData);
+      const surveyResult = {
+        name: surveyData.userName,
+        rating: surveyData.rating,
+        id: new Date().toISOString()
+      }
+      this.saveSurveyResults.push(surveyResult)
+      console.log(surveyResult)
     }
-  }
+  } */
 }
 </script>
 
