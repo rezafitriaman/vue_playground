@@ -1,17 +1,24 @@
 <template>
+  <the-navigation @set-page="setActivePage"></the-navigation>
   <main>
-
+    <component :is="activePage"></component>
+    <!-- <teams-List></teams-List> -->
+    <!-- <users-List></users-List> -->
   </main>
   
 </template>
 
 <script>
-//import HelloWorld from './components/HelloWorld.vue'
+import TheNavigation from './components/nav/TheNavigation.vue';
+import TeamsList from './components/teams/TeamsList.vue';
+import UsersList from './components/users/UsersList.vue';
 
 export default {
   name: 'App',
   components: {
-  
+    TheNavigation,
+    TeamsList,
+    UsersList
   },
   data() {
     return {
