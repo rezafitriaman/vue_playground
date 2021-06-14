@@ -26,16 +26,17 @@ export default {
     return {
       //activePage: 'teams-list',
       teams: [
-        { id: 't1', name: 'Frontend Engineers', members: ['u1', 'u2'] },
+        { id: 't1', name: 'Frontend Enginers', members: ['u1', 'u2'] },
         { id: 't2', name: 'Backend Eginers', members: ['u1', 'u2', 'u3'] },
         { id: 't3', name: 'Client Consulting', members: ['u4', 'u5'] },
+        { id: 't4', name: 'Client Consulting And Frondend Egineers', members: ['u1', 'u4'] },
       ],
       users: [
         {id: 'u1', fullName: 'Max Schwarz', role: 'Enginer'},
         {id: 'u2', fullName: 'Praveen Kumar', role: 'Enginer'},
         {id: 'u3', fullName: 'Julie Jones', role: 'Enginer'},
         {id: 'u4', fullName: 'Alex Blackfield', role: 'Consultant'},
-        {id: 'u5', fullName: 'Marie Smith', role: 'Consultant'}
+        {id: 'u5', fullName: 'Marie Smith', role: 'Consultant'},
       ],
     }
   },

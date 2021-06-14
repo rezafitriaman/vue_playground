@@ -26,7 +26,7 @@ export default {
 li {
     margin: 1rem 0;
     border: 1px solid #9b59b6;
-    padding: 1rem;
+    padding: 1rem;  
 }
 
 h3 {
