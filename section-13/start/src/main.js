@@ -20,7 +20,16 @@ const router = createRouter({
             ]
         },
         { path: '/users', 
-            components: { default: UsersList, footer: UsersFooter} 
+            components: { 
+                default: UsersList, 
+                footer: UsersFooter
+            },
+            beforeEnter(to, from, next) {
+                console.log('before enter')
+                console.log(to);
+                console.log(from);
+                next(); 
+            } 
         },
         { path: '/:notFound(.*)', component: NotFound },
     ],
@@ -39,6 +48,13 @@ router.beforeEach(function(to, from, next) {
     console.log('from', from);
     next();
 });
+
+router.afterEach(function(to, from) {
+    // sending analitics data
+    console.log('global after each');
+    console.log('to', to);
+    console.log('from', from);
+})
 
 const app = createApp(App)
 
