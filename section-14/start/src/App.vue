@@ -11,7 +11,14 @@
     <button @click="toggleParagraph">Toggle paragraph</button>
   </div>
 
-  <base-modal @close="hideDialog" v-if="dialogIsVisible">
+  <div class="container">
+    <transition name="button" mode="out-in">
+      <button @click="showUsers" v-if="!usersAreVisible">Show users</button>
+      <button @click="hideUsers" v-else-if="usersAreVisible">Hide users</button>
+    </transition>
+  </div>
+
+  <base-modal @close="hideDialog" :open="dialogIsVisible">
     <h4>Lets Go!</h4>
     <p>This is a test dialog!</p>
     <button @click="hideDialog">Close it!</button>
@@ -36,9 +43,16 @@ export default {
       paraIsVisible: false,
       animatedBlock: false,
       dialogIsVisible: false,
+      usersAreVisible: false,
     }
   },
   methods: {
+    showUsers() {
+      this.usersAreVisible = true
+    },
+    hideUsers() {
+      this.usersAreVisible = false
+    },
     toggleParagraph() {
       this.paraIsVisible = !this.paraIsVisible
     },
@@ -148,6 +162,36 @@ p {
   transform: translateX(-150px);
 }
 
+.modal-enter-from {/* 
+  opacity: 0;
+  transform: translateY(-30px);
+ */}
+
+.modal-enter-active {
+  /* transition: all .4s ease-in; */
+  animation: modal 0.4s ease-in-out;
+}
+
+.button-enter-from,
+.button-leave-to {
+  opacity: 0;
+}
+
+.button-enter-active {
+  transition: opacity .4s ease-out;
+
+}
+
+.button-leave-active {
+  transition: opacity .4s ease-in;
+
+}
+
+.button-enter-to,
+.button-leave-from {
+  opacity: 1;
+}
+
 @keyframes slide-fade {
   0% {
     transform: translateX(0) scale(1);
@@ -159,4 +203,5 @@ p {
     transform: translateX(-150px) scale(1);
   }
 }
+
 </style>
