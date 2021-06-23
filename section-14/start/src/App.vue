@@ -5,7 +5,16 @@
   </div>
 
   <div class="container">
-    <transition>
+    <transition 
+      @before-enter="beforeEnter" 
+      @enter="enter" 
+      @after-enter="afterEnter" 
+      @before-leave="beforeLeave"
+      @leave="leave"
+      @after-leave="afterLeave"
+      @enter-cancelled="enterCancelled"
+      @leave-cancelled="leaveCancelled">
+      
       <p v-if="paraIsVisible">This is only sometime visible</p>
     </transition>
     <button @click="toggleParagraph">Toggle paragraph</button>
@@ -44,9 +53,60 @@ export default {
       animatedBlock: false,
       dialogIsVisible: false,
       usersAreVisible: false,
+      enterInterval: null,
+      leaveInterval: null
     }
   },
   methods: {
+    leaveCancelled() {
+      console.log('leaveCancelled')
+      clearInterval(this.leaveInterval)
+    },
+    enterCancelled() {
+      console.log('enterCancelled')
+      clearInterval(this.enterInterval)
+    },
+    afterEnter() {
+      console.log('afterenter')
+    },
+    enter(el, done) {
+      console.log('enter')
+      let round = 1;
+      this.enterInterval = setInterval(() =>{
+        console.log(round * 0.01)
+        el.style.opacity = round * 0.01;
+        round++;
+        if(round > 100) {
+          clearInterval(this.enterInterval);
+          done();
+        }
+      }, 20);
+    },
+    beforeLeave(el) {
+      console.log(el)
+      el.style.opacity = 1;
+    },
+    beforeEnter(el) {
+      console.log('beforeEnter')
+      console.log(el)
+      el.style.opacity = 0;
+    },
+    leave(el,done) {
+      console.log('leave')
+      let round = 1;
+      this.leaveInterval = setInterval(() =>{
+        console.log(round * 0.01)
+        el.style.opacity = 1 - round * 0.01;
+        round++;
+        if(round > 100) {
+          clearInterval(this.leaveInterval);
+          done();
+        }
+      }, 20);
+    },
+    afterLeave () {
+      console.log('afterleave')
+    },
     showUsers() {
       this.usersAreVisible = true
     },
@@ -129,20 +189,20 @@ button:active {
   animation: slide-fade 0.4s ease-in-out forwards;
 }
 
-.v-enter-from {/* 
+/* .v-enter-from {
   opacity: 0;
   transform: translateY(-30px);
- */}
+}
 
 .v-enter-active {
-  /* transition: all .4s ease-in; */
+  transition: all .4s ease-in;
   animation: slide-fade 0.4s ease-in-out;
 }
 
-.v-enter-to {/* 
+.v-enter-to {
   opacity: 1;
   transform: translateY(0);
- */}
+}
 
 .v-leave-from {
   opacity: 1;
@@ -156,7 +216,7 @@ button:active {
 .v-leave-to {
   opacity: 0;
   transform: translateY(0);
-}
+} */
 
 p {
   transform: translateX(-150px);
