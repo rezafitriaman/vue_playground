@@ -1,16 +1,57 @@
 <template>
-<router-view v-slot="slotProps">
-    <transition name="button" mode="out-in">
-      <component :is="slotProps.Component"></component>
+  <div class="container">
+    <list-data></list-data>
+  </div>
+  <div class="container">
+    <div class="block" :class="{ animate: animatedBlock }"></div>
+    <button @click="animateBlock">Animate</button>
+  </div>
+
+  <div class="container">
+    <transition 
+      @before-enter="beforeEnter" 
+      @enter="enter" 
+      @after-enter="afterEnter" 
+      @before-leave="beforeLeave"
+      @leave="leave"
+      @after-leave="afterLeave"
+      @enter-cancelled="enterCancelled"
+      @leave-cancelled="leaveCancelled">
+      
+      <p v-if="paraIsVisible">This is only sometime visible</p>
     </transition>
-</router-view>
+    <button @click="toggleParagraph">Toggle paragraph</button>
+  </div>
+
+  <div class="container">
+    <transition name="button" mode="out-in">
+      <button @click="showUsers" v-if="!usersAreVisible">Show users</button>
+      <button @click="hideUsers" v-else-if="usersAreVisible">Hide users</button>
+    </transition>
+  </div>
+
+  <base-modal @close="hideDialog" :open="dialogIsVisible">
+    <h4>Lets Go!</h4>
+    <p>This is a test dialog!</p>
+    <button @click="hideDialog">Close it!</button>
+  </base-modal>
+
+  <div class="container">
+    <button @click="showDialog">Show Dialog</button>
+  </div>
 </template>
 
 <script>
+import BaseModal from './components/BaseModal.vue'
+import ListData from './components/ListData.vue'
 
 
 export default {
   name: 'App',
+  components: {
+    BaseModal,
+    ListData
+  },
   data() {
     return {
       paraIsVisible: false,
@@ -214,21 +255,6 @@ p {
 .button-enter-to,
 .button-leave-from {
   opacity: 1;
-}
-.route-enter-from {
-
-}
-
-.route-enter-active {
-  animation: slide-fade .5s ease-in-out;
-}
-
-.route-enter-to {
-
-}
-
-.route-leave-active {
-  animation: slide-fade .5s ease-in;
 }
 
 @keyframes slide-fade {
