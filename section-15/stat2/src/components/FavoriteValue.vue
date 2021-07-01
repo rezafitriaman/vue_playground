@@ -1,5 +1,5 @@
 <template>
-    <h3>{{counter}}</h3>
+    <h3>{{counter}} d</h3>
     <p>We do more...</p>
 </template>
 
@@ -7,7 +7,7 @@
 export default {
     computed: {
         counter() {
-            return this.$store.state.counter
+            return this.$store.getters.normalizedCounter
         }
     },
 }
