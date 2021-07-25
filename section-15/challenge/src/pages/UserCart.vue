@@ -1,18 +1,26 @@
 <template>
     <section>
         <h2>Your Cart</h2>
-        <h3>Totaal Amount: 40</h3>
+      <h3>Totaal Amount: <base-badge mode="elegant">${{ cartTotal }}</base-badge></h3>
         <ul>
+            <!--TODO write <user-cart>-->
             <li>yess we gonna sell thisss</li>
         </ul>
     </section>
 </template>
 
 <script>
+
 export default {
-    setup() {
-        
-    },
+  inject: ['cart'],
+  components: {
+
+  },
+  computed: {
+    cartTotal() {
+      return this.cart.total.toFixed(2);
+    }
+  }
 }
 </script>
 

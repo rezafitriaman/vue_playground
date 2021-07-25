@@ -1,7 +1,6 @@
 <template>
   <the-header></the-header>
   <router-view/>
-  <p v-if="!isLoggedIn">test</p>
 </template>
 
 <script>
@@ -37,6 +36,7 @@ export default {
   provide() {
     return {
       isLoggedIn: this.isLoggedIn,
+      cart: this.cart,
       login: this.login,
       logout: this.logout
     }
