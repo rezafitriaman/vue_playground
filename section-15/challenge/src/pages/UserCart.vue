@@ -3,18 +3,26 @@
         <h2>Your Cart</h2>
       <h3>Totaal Amount: <base-badge mode="elegant">${{ cartTotal }}</base-badge></h3>
         <ul>
-            <!--TODO write <user-cart>-->
-            <li>yess we gonna sell thisss</li>
+          <cart-item
+          v-for="item in cart.item"
+          :key="item.productId"
+          :product-id="item.productId"
+          :title="item.title"
+          :image="item.image"
+          :price="item.price"
+          :qty="item.qty"
+          ></cart-item>
         </ul>
     </section>
 </template>
 
 <script>
+import CartItem from '../components/cart/CartItem';
 
 export default {
   inject: ['cart'],
   components: {
-
+    CartItem,
   },
   computed: {
     cartTotal() {
