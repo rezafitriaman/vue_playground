@@ -6,7 +6,7 @@
       </div>
       <div class="product__text">
         <h3>{{ title }}</h3>
-        <base-badge mode="highlight" :no-margin-left="true">
+        <base-badge mode="highlight" :noMarginLeft="true">
           <h4>${{ price }}</h4>
         </base-badge>
         <p>{{ description }}</p>
@@ -56,6 +56,14 @@ li {
   object-fit: cover;
 }
 
+.product__text {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .product__text h3 {
   margin: 0 0 0.5rem 0;
 }
@@ -66,6 +74,8 @@ li {
 
 .product__actions {
   text-align: center;
+  display: flex;
+  justify-content: flex-end;
 }
 
 button {

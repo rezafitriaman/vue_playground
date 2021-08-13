@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  props: ['mode', 'noMarginLeft']
+  props: ['mode', 'noMarginLeft'],
 }
 </script>
 
