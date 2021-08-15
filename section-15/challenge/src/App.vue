@@ -23,16 +23,6 @@ export default {
       this.isLoggedIn = false;
     }
   },
-  provide() {
-    return {
-      isLoggedIn: this.isLoggedIn,
-      cart: this.cart,
-      addProductToCart: this.addProductToCart,
-      removeProductFromCart: this.removeProductFromCart,
-      login: this.login,
-      logout: this.logout
-    }
-  }
 }
 </script>
 

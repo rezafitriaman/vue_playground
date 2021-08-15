@@ -18,10 +18,14 @@
 <script>
 import ProductItem from '../components/products/ProductItem';
 export default {
-    inject: ['products'],
-    components: {
+     components: {
         ProductItem
     },
+    computed: {
+        products() {
+             return this.$store.getters['prods/products'];
+         }
+    }
 }
 </script>
 

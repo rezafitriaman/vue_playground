@@ -1,23 +1,24 @@
+console.log('cart.js')
 export default {
-    namespace: true,
+    namespaced: true,
     state() {
         return {
             cart: {
-                item: [],
+                items: [],
                 total: 0,
                 qty: 0
             }
         }
     },
-    mutation: {
+    mutations: {
         addProductToCart(state, payload) {
-            const productData = payload.product;
-            const productInCartIndex = state.item.findIndex(
+            const productData = payload;
+            const productInCartIndex = state.cart.items.findIndex(
                 (cartItem) => cartItem.productId === productData.id
             );
 
             if (productInCartIndex >= 0) {
-                state.cart.item[productInCartIndex].qty++;
+                state.cart.items[productInCartIndex].qty++;
             } else {
                 const newItem = {
                     productId: productData.id,
@@ -26,39 +27,43 @@ export default {
                     price: productData.price,
                     qty: 1
                 };
-                state.item.push(newItem);
+                state.cart.items.push(newItem);
             }
-            state.qty++;
-            state.total += productData.price;
+            state.cart.qty++;
+            state.cart.total += productData.price;
         },
         removeProductFromCart(state, payload) {
             const prodId = payload.productId;
-            const productInCartIndex = state.item.findIndex(
+            const productInCartIndex = state.items.findIndex(
                 (cartItem) => cartItem.productId === prodId
             );
-            const prodData = this.cart.item[productInCartIndex];
-            state.item.splice(productInCartIndex, 1);
-            state.qty -= prodData.qty;
-            state.total -= prodData.price * prodData.qty;
+            const prodData = this.cart.items[productInCartIndex];
+            state.cart.items.splice(productInCartIndex, 1);
+            state.cart.qty -= prodData.qty;
+            state.cart.total -= prodData.price * prodData.qty;
         },
-        action: {
-            addToCart(context, payload) {
-                context.commit('addProductToCart', payload);
-            },
-            removeFromCart(context, payload) {
-                context.commit('removeProductFromCart', payload);
-            }
+    },
+    actions: {
+        addToCart(context, payload) {
+            const prodId = payload.id;
+            const products = context.rootGetters['prods/products'];
+            const product = products.find(prod => prod.id === prodId);
+            context.commit('addProductToCart', product);
         },
-        getters: {
-            products(state) {
-                return state.items;
-            },
-            totalSum(state) {
-                return state.total;
-            },
-            quantity(state) {
-                return state.qty;
-            }
+        removeFromCart(context, payload) {
+            context.commit('removeProductFromCart', payload);
         }
-    }
+    },
+    getters: {
+        products(state) {
+            console.log('state.cart.items', state.cart.items)
+            return state.cart.items;
+        },
+        totalSum(state) {
+            return state.cart.total.toFixed(2);
+        },
+        quantity(state) {
+            return state.cart.qty;
+        }
+    },
 }

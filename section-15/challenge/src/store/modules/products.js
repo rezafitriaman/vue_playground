@@ -1,8 +1,9 @@
+console.log('products.js')
 export default {
-    namespace: true,
+    namespaced: true,
     state() {
         return {
-            product: [
+            products: [
                 {
                     id: 'p1',
                     image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Books_HD_%288314929977%29.jpg/640px-Books_HD_%288314929977%29.jpg',
