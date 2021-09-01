@@ -28,7 +28,6 @@ export default {
       return this.$store.getters['cart/totalSum']
     },
       cartItems() {
-        console.log('asdf', this.$store.getters['cart/products'])
         return this.$store.getters['cart/products'];
     }
   }

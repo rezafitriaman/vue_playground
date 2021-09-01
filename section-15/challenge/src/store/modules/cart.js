@@ -33,11 +33,12 @@ export default {
             state.cart.total += productData.price;
         },
         removeProductFromCart(state, payload) {
+            console.log(payload)
             const prodId = payload.productId;
-            const productInCartIndex = state.items.findIndex(
+            const productInCartIndex = state.cart.items.findIndex(
                 (cartItem) => cartItem.productId === prodId
             );
-            const prodData = this.cart.items[productInCartIndex];
+            const prodData = state.cart.items[productInCartIndex];
             state.cart.items.splice(productInCartIndex, 1);
             state.cart.qty -= prodData.qty;
             state.cart.total -= prodData.price * prodData.qty;
