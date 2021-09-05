@@ -3,6 +3,11 @@
         Filter
     </section>
     <section>
-        List of Coaches
+        <div class="controls">
+            <button>Refresh</button>
+            <router-link to="/register">Register as a Couch</router-link>
+        </div>
+        <ul>List of Coaches</ul>
+
     </section>
 </template>
