@@ -26,7 +26,6 @@
         align-items: center;
     }
 
-
     header nav {
         width: 90%;
         margin: auto;

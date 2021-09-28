@@ -5,10 +5,11 @@
 
 <script>
 import TheHeader from './components/layout/TheHeader';
+
 export default {
   name: 'App',
   components: {
-    TheHeader
+      TheHeader
   }
 }
 </script>

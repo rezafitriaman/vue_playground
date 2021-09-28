@@ -1,3 +1,3 @@
 <template>
-    Details for coach
+    contact a coach
 </template>
