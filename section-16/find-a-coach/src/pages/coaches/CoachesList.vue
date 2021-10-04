@@ -44,22 +44,24 @@ export default {
   computed: {
     filteredCoaches() {
       const coaches =  this.$store.getters['coaches/coaches'];
-        console.log(coaches);
-
-
-      return coaches.filter(coach => {
-        if(this.activeFilters.frontend && coach.areas.includes('frontend')) {
+      let filteredCoaches = coaches.filter(coach => {
+        if(this.activeFilters['frontend'] && coach.areas.includes('frontend')) {
+          console.log('frontend');
           return true
         }
-        if(this.activeFilters.backend && coach.areas.includes('backend')) {
+        if(this.activeFilters['backend'] && coach.areas.includes('backend')) {
+          console.log('backend');
           return true
         }
-        if(this.activeFilters.career && coach.areas.includes('career')) {
+        if(this.activeFilters['career'] && coach.areas.includes('career')) {
+          console.log('career');
           return true
         }
-
+        console.log('nothing');
         return false
       });
+      console.log('filteredCoaches', filteredCoaches);
+      return filteredCoaches;
     },
     hasCoaches() {
       return this.$store.getters['coaches/hasCoaches'];
