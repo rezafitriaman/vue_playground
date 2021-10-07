@@ -7,11 +7,12 @@ const store = createStore({
     },
     state() {
         return {
-            userId: 'c3'
+            userId: 'c3w'
         }
     },
     getters: {
         userId(state) {
+            console.log('rootGetters --- ', state)
             return state.userId;
         }
     }

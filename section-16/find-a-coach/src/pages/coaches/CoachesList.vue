@@ -63,7 +63,6 @@ export default {
         console.log('nothing');
         return false
       });
-      console.log('filteredCoaches', filteredCoaches);
       return filteredCoaches;
     },
     hasCoaches() {
