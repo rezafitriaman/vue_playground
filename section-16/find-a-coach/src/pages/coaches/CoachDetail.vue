@@ -35,7 +35,6 @@ export default {
       return this.selectedCoach.firstName + ' ' + this.selectedCoach.lastName;
     },
     areas() {
-      console.log('area', this.selectedCoach.area);
       return this.selectedCoach.areas;
     },
     rate() {

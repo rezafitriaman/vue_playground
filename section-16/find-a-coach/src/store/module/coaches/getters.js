@@ -4,5 +4,12 @@ export default {
     },
     hasCoaches(state) {
         return state.coaches && state.coaches.length > 0
+    },
+    isCoach(state, getters, rootState, rootGetters) {
+        console.log(state);
+        console.log(rootState);
+        const coaches = getters.coaches;
+        const userId = rootGetters.userId;
+        return coaches.some(coach => coach.id === userId);
     }
 };
