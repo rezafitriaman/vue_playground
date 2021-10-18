@@ -14,10 +14,12 @@ export default {
             body: JSON.stringify(coachData)
         });
 
-        //const responseData = await response.json();
+        const responseData = await response.json();
 
         if(!response.ok) {
             console.log('error')
+            const error = new Error(responseData.message || 'failed to fetch!')
+            throw error
         }
 
         // commit this to mutations
@@ -31,6 +33,8 @@ export default {
         const responseData = await response.json();
         if(!response.ok) {
             console.log('error')
+            const error = new Error(responseData.message || 'failed to fetch!')
+            throw error
         }
 
         const coaches = [];
